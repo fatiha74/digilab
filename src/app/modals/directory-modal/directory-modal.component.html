@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Create directory</h1>
+<div mat-dialog-content>
+  <form class="form" [formGroup]="directoryForm" (ngSubmit)="onSubmit()" layout="column">
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nom</mat-label>
+      <input matInput placeholder="Nom" formControlName="nom">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Chemin</mat-label>
+      <input matInput placeholder="Chemin" formControlName="path">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <!-- <textarea matInput placeholder="Description" formControlName="description"> -->
+      <input matInput placeholder="Description" formControlName="description">
+    </mat-form-field>
+    <div class="button">
+      <span>
+        <button mat-raised-button [disabled]="directoryForm.invalid" color="primary"
+          type="submit">Valider</button></span>
+      <span>
+        <button mat-raised-button color="warn" (click)="onCloseModal()">Annuler</button></span>
+    </div>
+  </form>
+</div>

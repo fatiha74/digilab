@@ -1,0 +1,58 @@
+<h2 mat-dialog-title></h2>
+
+<mat-dialog-content>
+  <!-- {{data.infos | json}} -->
+  <mat-dialog-actions *ngIf="data.infos.nom">
+    <p>Nom : {{data.infos.nom}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.prenom">
+    <p>Prénom : {{data.infos.prenom}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.pseudo">
+    <p>Pseudo : {{data.infos.pseudo}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.dateB">
+    <p>Age : {{data.infos.dateB | age}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.mail">
+    <p>Mail : {{data.infos.mail}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.rue">
+    <p>Rue : {{data.infos.rue}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.cP">
+    <p>Code Postale : {{data.infos.cP}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.ville">
+    <p>Ville : {{data.infos.ville}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.pays">
+    <p>Pays : {{data.infos.pays}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.mail">
+    <p>mail : {{data.infos.mail}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.date">
+    <mat-icon matListIcon>folder</mat-icon>
+    <p>Date : {{data.date | date: "dd/MM/yyyy, à hh:mm"}}</p>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.infos.skills">
+    <mat-dialog-actions>
+      <p>Qualité :
+      <ul>
+        <li *ngFor="let i of data.infos.skills">{{i}}</li>
+      </ul>
+    </mat-dialog-actions>
+  </mat-dialog-actions>
+</mat-dialog-content>

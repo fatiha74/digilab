@@ -1,0 +1,64 @@
+<!-- <p>login works!</p>
+ Exemple Template Driven Form -->
+<!-- <div class="container">
+  <div class="class row">
+    <div class="col-12   mx-auto">
+      <div class="bg-white shadow rounded p-4">
+        <h1 class="display-6 text-dark">LOGIN</h1>
+        <hr class="bg-dark mb-5"> -->
+<!-- on ajoute la reference #profileForm, l'eventBinding (ngSubmit) -->
+<!-- <form #profileForm="ngForm" (ngSubmit)="onSubmitProfileForm(profileForm)"> -->
+<!-- <form>
+          <div class="form-group row mb-3">
+            <label for="email">Email</label>
+             on ajoute name et la directive ngModule -->
+<!-- <input type="text" id="email" name="email" ngModel>
+          </div>
+          <div class="form-group row mb-3">
+            <label for="date">Password</label>
+            <input type="text" id="password" name="password" ngModel>
+          </div>
+          <div class="d-flex">
+            <button class="btn btn-success mx-auto" type="submit">Valider</button>
+          </div>
+        </form>
+        <span>Vous n'avez pas encore de compte?</span><br>
+        <span>Cliquer <li><a routerLink="app-register">Ici</a></li>ici pour vous inscrire</span>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="class row">
+    <div class="col-12   mx-auto">
+      <div class="bg-white shadow rounded p-4">
+        <h1 class="display-6 text-dark">login</h1>
+        <div mat-dialog-content>
+          <form class="form" layout="column">
+
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder='rue' formControlName="rue">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password" formControlName="cp">
+            </mat-form-field>
+
+
+            <div class="button">
+              <span>
+                <button mat-raised-button [disabled]="" color="primary" type="submit">Valider</button>
+              </span>
+
+            </div>
+          </form>
+          <span>Vous n'avez pas encore de compte?</span><br>
+          <span>Cliquer <li><a routerLink="app-register">Ici</a></li>ici pour vous inscrire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

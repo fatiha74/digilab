@@ -1,0 +1,26 @@
+<section>
+  <mat-list>
+    <div class="list-header" mat-subheader>
+      <span>Directories </span>
+      <button mat-raised-button color="primary" (click)="openDialog()">
+        <mat-icon>create_new_folder </mat-icon>
+        <span> Add directory</span>
+
+      </button>
+    </div>
+    <mat-divider class="header-divider"></mat-divider>
+    <div class="list">
+      <div class="list-item" *ngFor="let item of directories">
+        <mat-list-item>
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <div class="line" mat-line>
+            <span class="dir-name">{{item.nom}}</span>
+            <span class="dir-name">{{item.path}}</span>
+            <span class="dir-name">{{item.description}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </mat-list>
+</section>

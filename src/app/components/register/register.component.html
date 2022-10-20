@@ -1,0 +1,241 @@
+<div class="container">
+  <div class="class row">
+    <div class="col-12   mx-auto">
+      <div class="bg-white shadow rounded p-4">
+        <div class="form-container" layout="column">
+          <h1>Register</h1>
+          <form class="container" [formGroup]="userForm" (ngSubmit)="onSubmit()" layout="column">
+
+            <mat-form-field appearance="fill" class=" form-element">
+              <input matInput placeholder="Nom" formControlName="nom">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-element">
+              <input matInput placeholder="Prénom" formControlName="prenom">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-element">
+              <input matInput placeholder="Pseudo" formControlName="pseudo">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill" class="form-element">
+              <input matInput placeholder="Rue" formControlName="rue">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill" class="form-element">
+              <input matInput placeholder="Code Postale" formControlName="cP">
+            </mat-form-field>
+
+
+
+            <mat-form-field appearance="fill" class="form-element">
+              <input matInput placeholder="Ville" formControlName="ville">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>
+                Pays
+              </mat-label>
+              <input matInput type="text" [matAutocomplete]="auto" formControlName="pays">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <!-- ma version -->
+                <!-- <mat-option *ngFor="let item of countries " [formControl]="myControl" [value]="item"> -->
+
+                <!-- version mohamed -->
+                <!-- <mat-option *ngFor="let item of option " [formControl]="myControl" [value]="option"> -->
+                <mat-option *ngFor="let option of filteredOptions | async " [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-element">
+              <input matInput placeholder="date de naissance" formControlName="dateB">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> E-mail
+              </mat-label>
+              <input matInput formControlName="mail">
+            </mat-form-field>
+
+
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Password
+              </mat-label>
+              <input matInput formControlName="password" required>
+            </mat-form-field>
+
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Confirme Password
+              </mat-label>
+              <input matInput formControlName="confirmPassword" required>
+              <mat-icon matSuffix>password</mat-icon>
+            </mat-form-field>
+
+
+            <!-- <div *ngFor="let control of skills.controls; index as i"> -->
+            <!-- <input [formControl]="skills.controls[i]" /> -->
+
+            <!-- formArrayName lie avec skills -->
+            <mat-label>qualites</mat-label>
+            <ng-container formArrayName="skills">
+
+              <!-- i va permettre un formControl on fai appel a l'index -->
+              <div *ngFor="let _ of skills.controls; index as i">
+                <mat-form-field>
+                  <input matInput [formControlName]="i" />
+                </mat-form-field>
+                <mat-icon (click)="removeSkill(i)" matSuffix>delete_forever</mat-icon>
+
+              </div>
+            </ng-container><!-- </div> -->
+            <button type="button" mat-mini-fab (click)="addSkills()">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button mat-raised-button [disabled]="userForm.invalid" color="primary" type="submit">Valider</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <mat-form-field class=" example-chip-list" appearance="fill">
+  <mat-label>Favorite Fruits</mat-label>
+  <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+      {{fruit}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input placeholder="New fruit..." #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto"
+      [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+      {{fruit}}
+    </mat-option>
+  </mat-autocomplete>
+  </mat-form-field> -->
+
+<!--
+            <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+              <mat-chip *ngFor="let chip of availableColors" selected [color]="chip.color">
+                {{chip.name}}
+              </mat-chip>
+            </mat-chip-list> -->
+
+
+
+<!-- <div *ngFor="let control of skills.controls; index as i">
+              <input [formControl]="skills.controls[i]" />
+              <button (click)="removeSkill(i)">X</button>
+            </div> -->
+
+
+
+
+
+<!-- <p>login works!</p>
+  Exemple Template Driven Form -->
+<!-- <div class="container">
+  <mat-form-field appearance="fill">
+    <mat-label>
+      Pays
+    </mat-label>
+    <input matInput type="text" [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">  -->
+<!-- ma version -->
+<!-- <mat-option *ngFor="let item of countries " [formControl]="myControl" [value]="item"> -->
+
+<!-- version mohamed -->
+<!-- <mat-option *ngFor="let item of option " [formControl]="myControl" [value]="option"> -->
+<!-- <mat-option *ngFor="let option of filteredOptions | async " [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div> -->
+
+<!-- ******************************************************************************************* -->
+<!-- formulaire Reactive avec material -->
+<!-- <div> -->
+<!-- <mat-card class="form-card" [formGroup]="loginInfoForm"> -->
+<!-- <mat-card-subtitle>Informations de connexion</mat-card-subtitle>  -->
+<!-- <mat-form-field appearance="fill">
+    <mat-label>Nom d'utilisateur</mat-label>
+    <input type="text" matInput formControlName="username">
+  </mat-form-field>
+  <div class="form-row">
+    <mat-form-field appearance="fill">
+      <mat-label>Mot de passe</mat-label>
+      <input type="password" matInput formControlName="password">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Confirmer votre mot de passe</mat-label>
+      <input type="password" matInput formControlName="confirmPassword">
+    </mat-form-field>
+  </div>
+   </mat-card> -->
+<!-- </div>
+<label>Hero name:</label> <input #qualite />
+<button (click)="addQualite(qualite.value); qualite.value=''">
+  Add
+</button> -->
+
+<!-- ********************************************************************************************* -->
+<!-- <div class="container">
+  <div class="class row">
+    <div class="col-12   mx-auto">
+      <div class="bg-white shadow rounded p-4">
+        <h1 class="display-6 text-dark">REGISTER</h1>
+        <hr class="bg-dark mb-5"> -->
+<!-- on ajoute la reference #profileForm, l'eventBinding (ngSubmit) -->
+<!-- <form #userForm="ngForm" (ngSubmit)="onSubmitUserForm(userForm)"> -->
+
+<!-- <div class="form-group row mb-3">
+          <label for="ageToday">Date Naissance</label>
+          on ajoute name et la directive ngModule -->
+
+<!-- <input type="date" id="date" name="date" [(ngModel)]="date">
+          <p>{{date|age}}</p>
+        </div>
+        <div class="form-group row mb-3">
+          <label for="country">Pays</label>
+          on ajoute name et la directive ngModule -->
+<!-- <input typeY="text" id="country" name="country" ngModel>
+        </div>
+        <div class="form-group row mb-3">
+          <label for="email">Email</label>
+          on ajoute name et la directive ngModule -->
+<!-- <input type="text" id="email" name="email" ngModel>
+        </div>
+        <div class="form-group row mb-3">
+          <label for="password">Password</label>
+          <input type="text" id="password" name="password" ngModel>
+        </div>
+        <div class="form-group row mb-3">
+          <label for="confirmDate">Confirm password</label>
+          <input type="text" id="confirmDate" name="confirmDate" ngModel>
+        </div>
+        <div class="form-group row mb-3">
+          <label for="qualite">Qualité</label>
+          <input type="text" id="qualite" name="qualite" ngModel>
+        </div> -->
+
+<!-- <div class="d-flex">
+          <button class="btn btn-success mx-auto" type="submit">Valider</button>
+        </div>
+        </form> -->
+<!-- </div>
+    </div>
+  </div>
+</div>  -->

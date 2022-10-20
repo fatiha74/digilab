@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Choisir la localité</h1>
+
+<div mat-dialog-content>
+  <form class="form" [formGroup]="weatherForm" (ngSubmit)="onSubmit()" layout="column">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Rue</mat-label>
+      <input matInput placeholder='rue' formControlName="rue">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>CP</mat-label>
+      <input matInput formControlName="cp">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ville</mat-label>
+      <!-- <textarea matInput placeholder="Description" formControlName="description"> -->
+      <input matInput formControlName="ville">
+    </mat-form-field>
+    <div class="button">
+      <span>
+        <button mat-raised-button [disabled]="weatherForm.invalid" color="primary" type="submit">Valider</button>
+      </span>
+      <span>
+      <mat-progress-spinner mode="indeterminate" *ngIf="isWait" [diameter]="30"></mat-progress-spinner>
+</span>
+      <!-- <button mat-raised-button color="warn" (click)="onCloseModal()">Annuler</button></span> -->
+    </div>
+  </form>
+</div>
+
