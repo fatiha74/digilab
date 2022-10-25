@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
-
+import { GlobalHttpService } from './global-http.service';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WeatherService {
+export class WeatherService extends GlobalHttpService{
 
   localisation: any[] = []
 
@@ -20,7 +20,7 @@ export class WeatherService {
   // BaseUrl = "https://geocoding-api.open-meteo.com/v1/search?name="
 
   // on injecte httpclient
-  constructor(private _http: HttpClient) { }
+  // constructor(private _http: HttpClient) { }
 
   /**
    *il nous impose une methode get

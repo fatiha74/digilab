@@ -35,11 +35,11 @@
       <div class="bg-white shadow rounded p-4">
         <h1 class="display-6 text-dark">login</h1>
         <div mat-dialog-content>
-          <form class="form" layout="column">
+          <form class="form" layout="column" (ngSubmit)="onSubmit()">
 
             <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
-              <input matInput placeholder='rue' formControlName="rue">
+              <input matInput placeholder='email' formControlName="rue">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
@@ -56,7 +56,7 @@
             </div>
           </form>
           <span>Vous n'avez pas encore de compte?</span><br>
-          <span>Cliquer <li><a routerLink="app-register">Ici</a></li>ici pour vous inscrire</span>
+          <span>Cliquer <li><a routerLink="register">Ici</a></li>ici pour vous inscrire</span>
         </div>
       </div>
     </div>

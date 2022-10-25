@@ -1,0 +1,12 @@
+<!-- {{data.first_name}} -->
+<mat-list>
+  <mat-list-item class="card mb-3 " *ngIf="data">
+    <img matListAvatar [src]="data.avatar" alt="...">
+    <h3 matLine> {{data.first_name}} </h3>
+
+    <p matLine>
+      <span> {{data.last_name}} </span>
+
+    </p>
+  </mat-list-item>
+</mat-list>

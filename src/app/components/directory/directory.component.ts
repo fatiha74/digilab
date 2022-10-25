@@ -1,14 +1,11 @@
-import { Directory } from 'src/app/models/directory-model';
-
-
-import { DirectoryModalComponent } from './../../modals/directory-modal/directory-modal.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+
+import { DataService } from 'src/app/services/data.service';
+import { Directory } from 'src/app/models/directory-model';
+import { DirectoryModalComponent } from './../../modals/directory-modal/directory-modal.component';
 import { DirectoryService } from 'src/app/services/directory.service';
-
-
 
 @Component({
   selector: 'app-directory',
@@ -34,7 +31,6 @@ export class DirectoryComponent implements OnInit {
 
 
   openDialog(): void {
-
     const dialogRef = this._matDialog.open(DirectoryModalComponent, {
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms'
@@ -46,7 +42,6 @@ export class DirectoryComponent implements OnInit {
       let data = responseFromModal.data
       this.directories.push(new Directory(data.nom, data.path, data.description))
       console.log(data)
-
     })
   }
 

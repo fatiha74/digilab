@@ -1,0 +1,27 @@
+.chat {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.left {
+  // background: #ddd;
+  align-self: end;
+
+}
+
+.right {
+  // background: #eee;
+  align-self: start;
+
+}
+
+.chipL {
+  background-color: cornflowerblue
+
+}
+
+.chipR {
+  background-color: #bbdefb
+}

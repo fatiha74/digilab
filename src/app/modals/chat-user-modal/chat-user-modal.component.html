@@ -1,0 +1,26 @@
+<!-- <h1 mat-dialog-title>Hi {{item.first_name}}</h1> -->
+
+<div mat-dialog-content>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <p>Etes vous sur de vouloir parler avec </p>
+      <p matline></p>
+    </mat-card-header>
+    <mat-list>
+      <mat-list-item class="card mb-3 ">
+        <img matListAvatar [src]="infos.user.avatar" alt="...">
+        <h3 matLine> {{infos.user.first_name}} </h3>
+
+        <p matLine>
+          <span> {{infos.user.last_name}} </span>
+          <span> {{infos.user.email}} </span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+    <button mat-button color="primary" (click)="onValidate()">
+      <mat-icon>done</mat-icon>
+    </button>
+    <button mat-button color="accent" (click)="onCancel()">Annuler</button>
+
+  </mat-card>
+</div>

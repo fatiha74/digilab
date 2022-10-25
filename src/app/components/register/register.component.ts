@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-
-
-import { DataService } from 'src/app/services/data.service';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs'
 
-import { UserService } from 'src/app/services/user.service';
+import { DataService } from 'src/app/services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { UserModalComponent } from 'src/app/modals/user-modal/user-modal.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -38,7 +37,7 @@ export class RegisterComponent implements OnInit {
   date!: any
 
   // on importe
-  constructor(private _matDialog: MatDialog, private _dataService: DataService, private _formBuilder: FormBuilder, private _userService: UserService, private http: HttpClient) { }
+  constructor(private route: Router, private _matDialog: MatDialog, private _dataService: DataService, private _formBuilder: FormBuilder, private _userService: UserService) { }
 
 
 
@@ -65,6 +64,9 @@ export class RegisterComponent implements OnInit {
     })
 
 
+
+    //**************  test heritage, la methode est dans la class mere GlobalHttpService
+    this._dataService.getProfileList()
 
 
 
@@ -139,6 +141,10 @@ export class RegisterComponent implements OnInit {
         })
 
     })
+
+    this.route.navigate(['/overview'])
+
+
   }
 
   // getCountry() {
