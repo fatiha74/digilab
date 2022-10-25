@@ -1,5 +1,5 @@
-<!-- {{data.first_name}} -->
-<mat-list>
+<!--
+ <mat-list>
   <mat-list-item class="card mb-3 " *ngIf="data">
     <img matListAvatar [src]="data.avatar" alt="...">
     <h3 matLine> {{data.first_name}} </h3>
@@ -8,5 +8,19 @@
       <span> {{data.last_name}} </span>
 
     </p>
+    <p>le input </p><br>
+    <p>{{test.email}}</p>
+  </mat-list-item>
+</mat-list>
+{{data.first_name}} <mat-list> -->
+
+
+<mat-list>
+  <mat-list-item class="card mb-3 " *ngIf="donnees && donnees.first_name">
+    <img matListAvatar [src]="donnees.avatar" alt="...">
+    <h3 matLine> {{donnees.first_name}} </h3>
+    <h3 matLine> {{donnees.last_name}} </h3>
+ 
+
   </mat-list-item>
 </mat-list>

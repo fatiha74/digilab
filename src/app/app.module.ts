@@ -36,6 +36,7 @@ import { UserComponent } from './components/user/user.component';
 import { UserModalComponent } from './modals/user-modal/user-modal.component'
 import { WeatherComponent } from './components/weather/weather.component';
 import { WeatherModalComponent } from './modals/weather-modal/weather-modal.component';
+import { FinderComponent } from './components/finder/finder.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { WeatherModalComponent } from './modals/weather-modal/weather-modal.comp
     ChatUserListComponent,
     ChatRoomComponent,
     ChatTopBarComponent,
-    ChatUserModalComponent
+    ChatUserModalComponent,
+    FinderComponent
   ],
   imports: [
     MatChipsModule,

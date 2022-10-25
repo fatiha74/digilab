@@ -1,44 +1,39 @@
-<app-chat-top-bar></app-chat-top-bar>
-<section class="border-top border-bottom" style="overflow-y: auto; min-height: 400px;">
-  <mat-chip-list>
-    <div class="chat" *ngFor="let item of results ">
-      <div class="right" *ngIf="item.setup">
-        <mat-chip color="accent" matline class="chipR"> {{item.setup}} </mat-chip>
-        <!-- class="left" *ngIf="item.punchline" > -->
-      </div>
-      <div class="left" *ngIf="item.punchline">
-        <mat-chip color="primary" matLine class="chipL"> {{item.punchline}} </mat-chip>
+
+
+  <app-chat-top-bar [donnees]="infoUser"></app-chat-top-bar>
+
+  <section class="border-top border-bottom" style="overflow-y: scroll; overflow-x:hidden; max-height: 70vh;">
+    <mat-chip-list>
+      <!-- <div class="d-flex flex-column"> -->
+      <div class="chat" *ngFor="let item of results ">
+        <!-- <div class="align-self-start"> -->
+        <div class="right" *ngIf="item.setup">
+          <mat-chip color="accent" matline class="chipR"> {{item.setup}} </mat-chip>
+          <!-- class="left" *ngIf="item.punchline" > -->
+        </div>
+        <!-- <div class="align-self-end"> -->
+        <div class="left" *ngIf="item.punchline">
+          <mat-chip color="primary" matLine class="chipL"> {{item.punchline}} </mat-chip>
+
+        </div>
 
       </div>
+    </mat-chip-list>
 
+  </section>
+
+  <section>
+    <div class="d-flex justify-content-center align-items-center">
+      <div>
+        <mat-form-field appearance="outline" class="w-100">
+
+          <input type="text" matInput [formControl]="newMessage" (keypress)="onSendMessage($event)">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="onClick()"> Envoyer</button>
+      </div>
     </div>
-  </mat-chip-list>
-  <!--
-   <div class="">
-     <ul>
-      <li *ngFor="let book of bookList; let index = index; let isFirst = first; let isOdd = odd;">
-          <span>{{ index }}</span>
-          <span>:</span>
-          <span>{{ book.name }}</span>
-          <span>( isFirst: {{ isFirst }}, isOdd: {{ isOdd }} )</span>
-      </li>
-  </ul> -->
-  <!-- </div> -->
-</section>
-<section>
-  <div class="d-flex justify-content-center align-items-center">
-    <div>
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>
 
-        </mat-label>
+  </section>
 
-        <input type="text" matInput [formControl]="newMessage"  (keypress)="onSendMessage($event)">
-      </mat-form-field>
-    </div>
-    <div>
-      <button mat-raised-button color="primary" (click)="onClick()"  > Envoyer</button>
-    </div>
-  </div>
-
-</section>

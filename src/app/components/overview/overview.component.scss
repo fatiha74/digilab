@@ -1,3 +1,9 @@
 .container-fluid {
-  min-height: 100vh !important;
+  // min-height: 100vh !important;
+  overflow: hidden ;
+
+  .navbar{
+    height: 10vh;
+    width:100vw;
+  }
 }

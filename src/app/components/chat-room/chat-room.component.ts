@@ -9,57 +9,73 @@ import { User } from './../../models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-chat-room',
-  templateUrl: './chat-room.component.html',
-  styleUrls: ['./chat-room.component.scss']
+    selector: 'app-chat-room',
+    templateUrl: './chat-room.component.html',
+    styleUrls: ['./chat-room.component.scss']
 })
+
 export class ChatRoomComponent implements OnInit {
 
 
-  newMessage: FormControl = new FormControl()
+    // l'utilisateur qui a ete selectionner , pour @Input
+    infoUser!: any
 
-  results: any[] = []
-  constructor(private _userService: UserService, private _chatService: ChatService) { }
-
-  ngOnInit(): void {
-
-    // la methode getUserCurrent reagi uniquement au préalable si la méthode SetUserCurrent est appelé
-    this._userService.getUserCurrent().subscribe((response: any) => {
-      console.warn(response)
-
-    })
-
-    this._chatService.getMessages().subscribe((value: any) => {
-
-      this.results = value
-      console.log(value)
-    })
-  }
-
-  onClick() {
-
-    this.results.push({ setup: this.newMessage.value })
-    this.newMessage.reset()
+    //  formControl de l'input
+    newMessage: FormControl = new FormControl()
 
 
+    results: any[] = []
+    constructor(private _userService: UserService, private _chatService: ChatService) { }
 
-  }
+    ngOnInit(): void {
 
-  // quand on appuie sur le bouton entre
-  onSendMessage(event: KeyboardEvent) {
+        // la methode getUserCurrent reagi uniquement au préalable si la méthode SetUserCurrent est appelé
+        this._userService.getUserCurrent().subscribe((response: any) => {
+            console.warn(response.value)
+            this.infoUser = response
 
-    console.warn(event)
-    if (event.code === "Enter") {
-      this.onClick()
+            this._chatService.getMessages().subscribe((value: any) => {
+              this.results = value
+              console.log(value)
+          })
 
-      setTimeout(() => {
-        let i = Math.floor(Math.random() * this.results.length);
+            // console.warn("info user" + this.infoUser.data)
+        })
 
-        this.results.push({ punchline:  this.results[i].punchline  })
-      }, 2000);
+
     }
 
-  }
+    onClick() {
+
+        // on push dans le tableau
+        this.results.push({ setup: this.newMessage.value })
+        this.newMessage.reset()
+        // reponse au bout de 2 seconde
+        
+        setTimeout(() => {
+            let i = Math.floor(Math.random() * this.results.length);
+
+            this.results.push({ punchline: this.results[i].punchline })
+        }, 2000);
+
+
+    }
+
+    // quand on appuie sur le bouton entre
+    onSendMessage(event: KeyboardEvent) {
+
+        console.warn(event)
+        if (event.code === "Enter") {
+            this.onClick()
+
+            setTimeout(() => {
+                let i = Math.floor(Math.random() * this.results.length);
+
+                this.results.push({ punchline: this.results[i].punchline })
+            }, 2000);
+        }
+
+    }
 
 
 }

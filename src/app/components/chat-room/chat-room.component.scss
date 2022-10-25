@@ -1,7 +1,14 @@
+.chatroom {
+  height: 70vh;
+  width: 90%
+}
+
 .chat {
-  width: 100%;
+  width: 100vw;
+  height: 100%;
   display: flex;
   flex-direction: column;
+
 
 }
 
@@ -19,9 +26,12 @@
 
 .chipL {
   background-color: cornflowerblue
-
 }
 
 .chipR {
   background-color: #bbdefb
+}
+
+::-webkit-scrollbar {
+  width: 0
 }

@@ -22,9 +22,9 @@ export class ChatUserListComponent implements OnInit {
   users: User[] = []
 
   //tableau
-  userInfos!: any[]
+  userInfos!: User[]
 
-  userArray!: any[]
+  userArray!: User[]
 
   // on inject le service
   constructor(private _userService: UserService, private _matDialog: MatDialog) { }
@@ -40,7 +40,6 @@ export class ChatUserListComponent implements OnInit {
 
       console.log(this.users)
     })
-
 
 
     // barre de recherche
