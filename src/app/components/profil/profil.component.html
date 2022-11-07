@@ -1,26 +1,37 @@
 <section class="profile">
-  <div>
-    <h1>Profile</h1>
-    <mat-form-field>
-      <mat-label>
-        Name
-      </mat-label>
-      <input matInput placeholder="" value="Sushi">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>
-        Prénom
-      </mat-label>
-      <input matInput placeholder="" value="Sushi">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>
-        Email
-      </mat-label>
-      <input matInput placeholder="" value="Sushi">
-      <mat-icon>local_post_office</mat-icon>
-    </mat-form-field>
-  </div>
+
+  <mat-list *ngIf="myProfil">
+    <img matListAvatar [src]="myProfil.body.avatar" alt="...">
+
+
+  </mat-list>
+
+
+  <h1>Profile</h1>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      Nom
+    </mat-label>
+    <mat-icon matPrefix>person</mat-icon>
+    <input matInput  [value]="myProfil.body.firstName">
+  </mat-form-field >
+  <mat-form-field appearance="outline">
+    <mat-label>
+      Prénom
+    </mat-label>
+    <mat-icon matPrefix>person</mat-icon>
+    <input matInput [value]="myProfil.body.lastName">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>
+      Email
+    </mat-label>
+    <mat-icon matPrefix>local_post_office</mat-icon>
+    <input matInput  [value]="myProfil.body.email">
+
+  </mat-form-field>
+
 </section>
 <!-- <p>profil works!</p>
  on utilise isActive seulement si isActive est à true -->

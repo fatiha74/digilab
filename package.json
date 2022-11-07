@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "compodoc": "npx compodoc -p src/tsconfig.app.json",
+    "compodoc:serve": "npx compodoc -p src/tsconfig.app.json -s",
+    "compodoc:serve:watch": "npx compodoc -p src/tsconfig.app.json -s -w"
   },
   "private": true,
   "dependencies": {
@@ -21,9 +24,11 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@ctrl/ngx-emoji-mart": "^7.0.0",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
+    "ngx-socket-io": "^4.3.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

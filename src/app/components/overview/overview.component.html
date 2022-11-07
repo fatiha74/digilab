@@ -1,19 +1,63 @@
-<div class="container-fluid border overflow-hidden">
+<div class="container-fluid border ">
 
   <div class="row">
-    <div class="col-md-2 border">
-      <app-side-bar-left></app-side-bar-left>
-    </div>
 
-    <div class="col-md-8 overflow-hidden border overflow-hidden">
-      <div class="navbar">
-      <nav class=" row navbar navbar-light bg-light shadow">
-        <span>Digilab</span>
-      </nav>
-    </div>
-      <section>
-        <router-outlet></router-outlet>
-      </section>
+    <!-- <div class="col-md-2 border overflow-hidden">
+      <app-side-bar-left></app-side-bar-left>
+    </div> -->
+
+    <div class="col-md-10 overflow-hidden border ">
+      <!-- <div class="navbar">
+        <nav class="  navbar navbar-light bg-light shadow">
+          <mat-icon>menu</mat-icon>
+        </nav>
+      </div> -->
+
+
+
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <h1>Digilab</h1>
+          <button mat-button (click)="opened=!opened">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <button mat-button (click)="onDisconect()"><mat-icon>logout</mat-icon></button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+
+      <mat-drawer-container class="sidenav-container">
+        <mat-drawer [(opened)]="opened" mode="side">
+          <mat-nav-list>
+
+            <a mat-list-item routerLink="/overview/profil" routerLinkActive="active">
+              <mat-icon>account_circle</mat-icon>Profil
+            </a>
+            <a mat-list-item routerLink="/overview/chat" routerLinkActive="active">
+              <mat-icon>chat</mat-icon>Chat
+            </a>
+            <a mat-list-item routerLink="/overview/directory" routerLinkActive="active">
+              <mat-icon>folder_open</mat-icon>Directory
+            </a>
+            <a mat-list-item routerLink="/finder" routerLinkActive="active">
+              <mat-icon>person_search</mat-icon>Finder
+            </a>
+
+          </mat-nav-list>
+        </mat-drawer>
+        <mat-drawer-content>
+          <section>
+            <router-outlet></router-outlet>
+          </section>
+        </mat-drawer-content>
+      </mat-drawer-container>
+
+
+
+      <!-- <section>
+    <router-outlet></router-outlet>
+  </section>
+-->
     </div>
 
     <div class="col-md-2 border">

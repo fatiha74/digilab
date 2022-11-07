@@ -1,3 +1,6 @@
+import { Message } from "./message";
+import { Room } from "./room";
+
 // exemple heritage
 class Role {
 
@@ -14,26 +17,43 @@ class Role {
 // on oblige à implementer getEmail(), implements pour utiliser cette interface
 export class User {
 
-  public firstName!: string;
-  public lastName!: string;
-  public email!: string;
+  username!: string
+  firstName!: string
+  lastName!: string
+  avatar!: string
+  readonly _id?: string
+  password?: string
+  email?: string
+  roomID?: Room[]
+  sentMessagesID?: Message[]
+  receivedMessagesID?: Message[]
+  isLoggedIn?: boolean
+  token?: string
+  country?: string
+  city?: string
+  street?: string
+  zipCode?: number
+  phoneNumber?: string
+  dialCode?: string
+  skills?: string[]
+  role?: string
+  friendsID?: User[]
+  dateOfBirth?:string | Date
+  online?:boolean
 
-  public imgUrl?: string;
-  // readonly id: number = 0;
-  public avatar?: string;
 
-  constructor(firstName: string, lastName: string, email: string, imgUrl: string) {
+  constructor() {
 
 
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.avatar = imgUrl;
+    // this.username = firstName;
+    // this.lastName = lastName;
+    // this.email = email;
+    // this.avatar = imgUrl;
   }
 
-  getEmail(): string {
-    return this.email
-  }
+  // getEmail(): string {
+  //   // return this.email
+  // }
 
 }
 

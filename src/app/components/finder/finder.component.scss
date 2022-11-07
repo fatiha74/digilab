@@ -1,0 +1,38 @@
+.menu {
+  width: 100vw;
+  height: 5vh;
+}
+
+.image {
+  height: 30vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+
+  img {
+
+    height: 30vh
+  }
+
+}
+
+.recherche {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.sidenav-container-finder {
+  height: 100%;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+
+
+}
+
+mat-sidenav {
+  width: 200px;
+}

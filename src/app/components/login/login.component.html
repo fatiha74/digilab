@@ -28,37 +28,43 @@
     </div>
   </div>
 </div> -->
+<section class="titre">
+  <h1>  DIGILAB   </h1>
 
 <div class="container">
   <div class="class row">
-    <div class="col-12   mx-auto style=width: 200px">
+    <div class="col-4   mx-auto style=width: 200px">
       <div class="bg-white shadow rounded p-4">
-        <h1 class="display-6 text-dark">login</h1>
+        <h1 class="display-6 text-dark"> Vous avez déjà un compte</h1>
+        <h1 class="display-6 text-dark"> Connexion !</h1>
         <div mat-dialog-content>
-          <form class="form" layout="column" (ngSubmit)="onSubmit()">
 
-            <mat-form-field appearance="fill">
+          <form class="form" layout="column" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+            <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
-              <input matInput placeholder='email' formControlName="rue">
+              <input matInput placeholder='email' formControlName="email">
+              <mat-icon matSuffix color="primary">local_post_office</mat-icon>
             </mat-form-field>
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
-              <input matInput placeholder="Password" formControlName="cp">
+              <input matInput placeholder="Password" formControlName="password">
+              <mat-icon color="primary" matSuffix>password</mat-icon>
             </mat-form-field>
-
 
             <div class="button">
               <span>
-                <button mat-raised-button [disabled]="" color="primary" type="submit">Valider</button>
+                <button mat-raised-button [disabled]="loginForm.invalid" color="primary" type="submit">Valider</button>
               </span>
 
             </div>
           </form>
           <span>Vous n'avez pas encore de compte?</span><br>
-          <span>Cliquer <li><a routerLink="register">Ici</a></li>ici pour vous inscrire</span>
+          <a routerLink="/register">Créer un compte ici</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+</section>

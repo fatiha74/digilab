@@ -17,8 +17,7 @@ export class UserModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.data = this.results
-    // console.log(this.results)
+     console.log(this.data)
   }
   // getFloatLabelValue(): FloatLabelType {
   //   return this.floatLabelControl.value || 'auto';

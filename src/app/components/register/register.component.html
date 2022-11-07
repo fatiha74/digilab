@@ -3,42 +3,46 @@
     <div class="col-12   mx-auto">
       <div class="bg-white shadow rounded p-4">
         <div class="form-container" layout="column">
-          <h1>Register</h1>
+          <h1>Créer votre compte</h1>
           <form class="container" [formGroup]="userForm" (ngSubmit)="onSubmit()" layout="column">
 
             <mat-form-field appearance="fill" class=" form-element">
-              <input matInput placeholder="Nom" formControlName="nom">
+              <input matInput placeholder="Nom" formControlName="lastName">
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="form-element">
-              <input matInput placeholder="Prénom" formControlName="prenom">
+              <input matInput placeholder="Prénom" formControlName="firstName">
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="form-element">
-              <input matInput placeholder="Pseudo" formControlName="pseudo">
-            </mat-form-field>
-
-
-            <mat-form-field appearance="fill" class="form-element">
-              <input matInput placeholder="Rue" formControlName="rue">
+              <input matInput placeholder="Pseudo" formControlName="username">
             </mat-form-field>
 
 
             <mat-form-field appearance="fill" class="form-element">
-              <input matInput placeholder="Code Postale" formControlName="cP">
+              <input matInput placeholder="Rue" formControlName="street">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill" class="form-element">
+              <input matInput placeholder="Code Postale" formControlName="zipCode">
             </mat-form-field>
 
 
 
             <mat-form-field appearance="fill" class="form-element">
-              <input matInput placeholder="Ville" formControlName="ville">
+              <input matInput placeholder="Ville" formControlName="city">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-element">
+              <input matInput placeholder="Télephone" formControlName="phoneNumber">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
               <mat-label>
                 Pays
               </mat-label>
-              <input matInput type="text" [matAutocomplete]="auto" formControlName="pays">
+              <input matInput type="text" [matAutocomplete]="auto" formControlName="country">
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <!-- ma version -->
                 <!-- <mat-option *ngFor="let item of countries " [formControl]="myControl" [value]="item"> -->
@@ -52,13 +56,14 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="form-element">
-              <input matInput placeholder="date de naissance" formControlName="dateB">
+              <input matInput placeholder="date de naissance" formControlName="dateOfBirth">
             </mat-form-field>
+
 
             <mat-form-field class="form-field" appearance="outline">
               <mat-label> E-mail
               </mat-label>
-              <input matInput formControlName="mail">
+              <input matInput formControlName="email">
             </mat-form-field>
 
 
@@ -66,6 +71,7 @@
               <mat-label> Password
               </mat-label>
               <input matInput formControlName="password" required>
+              <mat-icon matSuffix>password</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="form-field" appearance="outline">
@@ -74,6 +80,11 @@
               <input matInput formControlName="confirmPassword" required>
               <mat-icon matSuffix>password</mat-icon>
             </mat-form-field>
+<!--
+<mat-form-field *ngIf="errorPass">
+  <p>errorPass</p>
+</mat-form-field> -->
+
 
 
             <!-- <div *ngFor="let control of skills.controls; index as i"> -->
@@ -95,7 +106,7 @@
             <button type="button" mat-mini-fab (click)="addSkills()">
               <mat-icon>add</mat-icon>
             </button>
-            <button mat-raised-button [disabled]="userForm.invalid" color="primary" type="submit">Valider</button>
+            <button mat-raised-button [disabled]="userForm.invalid" color="primary" type="submit"   >Valider</button>
 
           </form>
         </div>

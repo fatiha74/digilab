@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
+import { BackendService } from './../../services/backend.service';
+import { ChatService } from './../../services/chat.service';
 import { ChatUserModalComponent } from './../../modals/chat-user-modal/chat-user-modal.component';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { User } from './../../models/user';
 import { UserService } from 'src/app/services/user.service';
 import { __values } from 'tslib';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app-chat-user-list',
@@ -15,34 +18,92 @@ import { __values } from 'tslib';
 })
 export class ChatUserListComponent implements OnInit {
 
+  // * toggle
+  isChecked = true;
+
+  isFriend = false;
+
+  nameChecked = ""
+
+
+  showFiller = false;
   // bar de recherche
   searchBar: FormControl = new FormControl();
 
-  // je cree un tableau qui va recuperer les donnees
+  //* tableau qui va recupere la liste des utilisateurs
   users: User[] = []
 
-  //tableau
-  userInfos!: User[]
+  // * tableau contenant la liste d'amis
+  friends: User[] = []
 
+  myProfil!: any
+  //tableau
+  // userInfos!: User[]
+
+  //duplicata du tableau recu de l'api
   userArray!: User[]
 
+  profileUser!: any
+
+  // * les personnes en ligne
+  statusOnline:any[]=[]
+
   // on inject le service
-  constructor(private _userService: UserService, private _matDialog: MatDialog) { }
+  constructor(private _userService: UserService, private _matDialog: MatDialog, private _backend: BackendService, private _chatService: ChatService) { }
 
   ngOnInit(): void {
 
-    // service.methodedansservice.souscription(resultat de l'observable)
-    // recupere la liste des utilisateurs
-    this._userService.getUsers().subscribe((result: User[]) => {
-      this.users = result
-      // fait une copie du tableau equivaut this.userArray=result
-      this.userArray = [... this.users]
 
-      console.log(this.users)
+
+
+
+    // * liste des amis
+    this._chatService.getFriends().subscribe((val: any) => {
+      this.friends = val
     })
 
 
-    // barre de recherche
+    if (this.isChecked) {
+      this.nameChecked = "amis"
+    } else {
+      this.nameChecked = "utilisateurs"
+    }
+    // * filter tableau users et friends
+    // this.friends = this.friends.filter(elem => elem.username !== this.users.includes(elem.username))
+
+
+    //  * on recupere le profile dans le backend
+    this._backend.getProfileUserCurrent().subscribe((response: User) => {
+      this.myProfil = response
+      console.warn(response)
+    })
+
+    // service.methodedansservice.souscription(resultat de l'observable)
+    //*on recupere la liste des utilisateurs
+    // this._userService.getUsers().subscribe((result: User[]) => {
+    //   this.users = result
+    //   //on duplique le tableau users
+    //   this.userArray = [... this.users]
+    // })
+
+    // * avoir le profile
+    this._userService.getProfile().subscribe((val: any) => {
+      console.warn(val)
+      this.myProfil = val.body
+      console.warn(this.myProfil)
+    })
+
+    // * getuserlist du backend
+    this._userService.getUsersList().subscribe((val: any) => {
+      console.warn(val)
+      this.users = val.body
+      console.warn(this.users)
+    })
+
+
+
+
+    //*la barre de recherche pour la liste de user
     this.searchBar.valueChanges.subscribe((value: any) => {
       // si j'ecris une valeur dans la barre de recherche
       if (value) {
@@ -51,7 +112,6 @@ export class ChatUserListComponent implements OnInit {
             // tableau filtré
             return (user.first_name).toLowerCase().includes(value.toLowerCase())
           }
-
         })
       } else {
         // je recupere le tableau d'origine
@@ -60,7 +120,66 @@ export class ChatUserListComponent implements OnInit {
 
     })
 
+
+    this._chatService.friendsOnLine();
+
+    this._chatService.getFriendsOnline().subscribe((usersOnline: any) => {
+      console.log('liste des users connectés :' + usersOnline);
+
+
+      this.users.forEach((userTab: any) => {
+        if ((usersOnline).includes(userTab.username)) {
+
+          userTab.online = true
+
+        }
+      })
+
+      this.friends.forEach((userTab: any) => {
+        if ((usersOnline).includes(userTab.username)) {
+
+          userTab.online = true
+
+        }
+      })
+    })
+
   }
+  // // !version sans le backend
+  // // on affiche la personne qui s'est loguer
+  // // ! version sans le backend
+  // this._userService.getProfile().subscribe((response: any) => {
+
+  //   console.log(response)
+  //   this.profileUser = response
+  //   console.warn(response)
+
+  // })
+
+
+
+
+
+  // *Ajouter comme ami
+  onAddFriend(item: User) {
+    this._chatService.addFriend(item).subscribe((value: any) => {
+      console.log(value)
+      // * l'ajouter au tableau le nouvel amis l'objet item
+      this.friends.push(item)
+      // this.okFriend=true;
+    })
+
+  }
+
+  onRemoveFriend(user: any) {
+    // const index =this.friends.indexOf(i)
+    // if(index > -1){
+    //   this.friends.splice(index,1)
+    // }
+    this.friends = this.friends.filter(elem => elem.username !== user.username)
+  }
+
+
 
   // parametre c'est le user que j'ai cliqué
   // ou en parametre user
@@ -79,9 +198,11 @@ export class ChatUserListComponent implements OnInit {
         // une methode pour dire qu'on utilise cet utilisateur
         // j'envoi l'info à travers un service à tous les components qui vont souscrire à cette observable
         this._userService.setUserCurrent(user)
+
       }
 
     })
 
   }
+
 }

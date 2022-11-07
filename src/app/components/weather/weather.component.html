@@ -1,18 +1,26 @@
 
-        <div>
-        <h1 class="display-6 text-dark">weather</h1>
-        <div>{{meteo.rue}}</div>
-        <div>{{meteo.cp}}</div>
-        <div>{{meteo.ville}}</div>
-        <div *ngIf="meteo.temperature">
-          <img src="../../assets/temperature.png">
-          {{meteo.temperature}}
-        </div>
 
-        <button mat-raised-button color="primary" (click)="openDialog()">
-          <mat-icon>room</mat-icon>
-          <span> Choisir une ville</span>
+  <div class="container">
+    <div class="class row">
+      <div class="col-12   mx-auto ">
+        <div class="bg-white shadow rounded p-4">
+  <h1 class="display-6 text-dark">Méteo</h1>
+  <div>{{meteo.rue}}</div>
+  <div>{{meteo.cp}}</div>
+  <div>{{meteo.ville}}</div>
+  <div *ngIf="meteo.temperature">
+    <img src="../../assets/temperature.png">
+    {{meteo.temperature}}
+  </div>
+
+  <button mat-raised-button color="primary" (click)="openDialog()">
+    <mat-icon>room</mat-icon>
+    <span> Choisir une ville</span>
 
 
-        </button>
-      </div>
+  </button>
+</div>
+</div>
+</div>
+</div>
+

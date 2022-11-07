@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { BackendService } from './../../services/backend.service';
+
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OverviewComponent implements OnInit {
 
-  constructor() { }
+opened=true
+
+  constructor(private _backend:BackendService) { }
 
   ngOnInit(): void {
+   // recuperer le profil de l'utilisateur courant
+
+  }
+
+  onDisconect(){
+
+this._backend.clearToken()
+
+
   }
 
 }

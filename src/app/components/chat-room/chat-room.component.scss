@@ -25,13 +25,37 @@
 }
 
 .chipL {
-  background-color: cornflowerblue
+  // background-color: #448aff;
+  min-height: 20px;
+  width:auto;
+  height: auto;
 }
 
 .chipR {
-  background-color: #bbdefb
+  // background-color:#83b9ff;
+  min-height: 20px;
+  width:auto;
+  height: auto;
 }
 
 ::-webkit-scrollbar {
   width: 0
+}
+
+.myClass{
+  background-color:#aeccf3;
+  min-height: 20px;
+  width:auto;
+  height: auto;
+}
+.myFriend{
+   background-color: #448aff;
+  min-height: 20px;
+  width:auto;
+  height: auto;
+}
+
+.date{
+
+background-color: rgba(128, 128, 128, 0.096);
 }

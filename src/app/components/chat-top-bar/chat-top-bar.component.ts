@@ -19,11 +19,11 @@ export class ChatTopBarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this._userService.getUserCurrent().subscribe((response: any) => {
-    //   console.warn(response)
-    //   this.data = response
+    this._userService.getUserCurrent().subscribe((response: any) => {
+      console.warn(response)
+      this.data = response
 
-    // })
+    })
 
     // console.warn("test"+this.test)
 

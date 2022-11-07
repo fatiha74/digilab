@@ -12,15 +12,21 @@
     <p>{{test.email}}</p>
   </mat-list-item>
 </mat-list>
-{{data.first_name}} <mat-list> -->
+{{data.first_name}} <mat-list>
 
 
+
+
+         <img matListAvatar [src]="donnees.avatar" alt=''>
+    <h3 matLine> {{donnees| json}} </h3>
+     <h3 matLine> {{donnees.lastName}} </h3> -->
+
+
+<div class="w-100 ">
 <mat-list>
-  <mat-list-item class="card mb-3 " *ngIf="donnees && donnees.first_name">
-    <img matListAvatar [src]="donnees.avatar" alt="...">
-    <h3 matLine> {{donnees.first_name}} </h3>
-    <h3 matLine> {{donnees.last_name}} </h3>
- 
-
+  <mat-list-item class="card mb-3 " *ngIf="donnees">
+   <img matListAvatar [src]="donnees.avatar" alt=''>
+   <p>Vous discutez avec : </p>  <h3> {{donnees.username}} </h3>
   </mat-list-item>
 </mat-list>
+</div>

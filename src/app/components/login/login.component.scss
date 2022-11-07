@@ -1,4 +1,14 @@
+.titre{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
 .form {
   display: flex;
   flex-direction: column;
 }
+
+

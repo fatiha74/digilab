@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs'
 
+import { BackendService } from 'src/app/services/backend.service';
 import { DataService } from 'src/app/services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
 import { UserModalComponent } from 'src/app/modals/user-modal/user-modal.component';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,12 +21,11 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterComponent implements OnInit {
 
   //skills!: FormArray
-
+  avatar!: string
   // const form = this.userForm.value;
   // un attribut recoit toute les info du formulaire
   userForm!: FormGroup;
-
-
+  errorPass = true
   options = ["sam", "toto"]
   countries!: any[]
   countriesFiltre!: any[]
@@ -32,43 +34,44 @@ export class RegisterComponent implements OnInit {
   // on declare l'attribut option
   // retourne un tableau
   option!: string[];
-
   filteredOptions: Observable<string[]> | undefined;
   date!: any
+  // on instancie un nouvel utilisateur
+  user = new User()
 
   // on importe
-  constructor(private route: Router, private _matDialog: MatDialog, private _dataService: DataService, private _formBuilder: FormBuilder, private _userService: UserService) { }
-
-
+  constructor(private route: Router, private _matDialog: MatDialog,
+    private _dataService: DataService, private _fb: FormBuilder,
+    private _backend: BackendService, private _snackBar: MatSnackBar, private _userService: UserService) { }
 
   ngOnInit(): void {
 
+    // initialiser avatar
+    this.avatar = "https://picsum.photos/200"
     // je construis mon formulaire, attribut group(un objet)
-    this.userForm = this._formBuilder.group({
-      // on initialise, les clés doient respecter les formControlName
-      nom: '',
-      prenom: '',
-      pseudo: '',
-      dateB: '',
-      mail: ['', [Validators.email, Validators.required]],
-      rue: '',
-      cP: 0,
-      ville: '',
-      pays: '',
-      password: ['', [Validators.minLength(8), Validators.required]],
-      confirmPassword: ['', [Validators.minLength(8), Validators.required]],
-      // qualite: ''
-      // on ajoute un, on instance , initialise avec un tableau vide
-      skills: new FormArray([]),
-      // createdAt: String
+    this.userForm = this._fb.group({
+      username: [this.user.username, Validators.required],
+      firstName: [this.user.firstName, Validators.required],
+      lastName: [this.user.lastName, Validators.required],
+      avatar: [this.avatar],
+      password: [this.user.password, [Validators.minLength(8),
+      Validators.maxLength(12)]],
+      confirmPassword: ["", Validators.required],
+      dateOfBirth: this.user.dateOfBirth,
+      email: [this.user.email, [
+        Validators.email,
+        Validators.required]],
+      country: this.user.country,
+      city: this.user.city,
+      street: [this.user.street, Validators.required],
+      zipCode: this.user.zipCode,
+      phoneNumber: this.user.phoneNumber,
+      skills: new FormArray([])
     })
-
 
 
     //**************  test heritage, la methode est dans la class mere GlobalHttpService
     this._dataService.getProfileList()
-
-
 
     // *********** correction
     this._dataService.getCountries().subscribe((countries: any) => {
@@ -80,7 +83,7 @@ export class RegisterComponent implements OnInit {
 
     // ds le userForm tu va filtrer les pays
     // @ts-ignore
-    this.filteredOptions = this.userForm?.get('pays')?.valueChanges.pipe(
+    this.filteredOptions = this.userForm?.get('country')?.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
@@ -128,21 +131,76 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
 
+    const profil = this.userForm.value
+    const password = profil.password
+    const confirmPass = profil.confirmPassword
+
+    if (password !== confirmPass) {
+      this.errorPass = true;
+      this._snackBar.open('mot de passe different', 'ok', {
+        verticalPosition: 'top',
+        horizontalPosition: 'end',
+        duration: 2000,
+        panelClass: ['red-snackbar']
+
+      })
+      return;
+    }
+
     // toute les clés avec les valeur du formulaire
-    console.log(this.userForm.value)
+    // console.log(this.profilForm.value)
 
     // on recupere les donnees avec userform.value, on renvoie a l'api
+    const form = this.userForm.value
 
-    this._userService.postData(this.userForm.value).subscribe((response: any) => {
+    // 1ERE version sur 10 ligne
+    // this.user.firstName=form.nom
+    // 2eme version
+    // on va fusionner les deux objets
+    //   je vais affecter a this user la fusion, form vient fusionner au user
+    this.user = Object.assign(this.user, form)
+
+    // pour les skills
+    this.user.skills = this.userForm.value.skills
+
+
+    // this._userService.postData(form).subscribe((response: any) => {
+    //     console.log(response)
+    //     this._matDialog.open(UserModalComponent,
+    //         {
+    //             data: { date: response.createdAt, infos: response.data}
+    //         })
+
+
+    //     console.log(form)
+
+    // })
+
+    this._userService.register(this.user).subscribe((response: any) => {
+
+      let { headers, status, body } = response
       console.log(response)
-      this._matDialog.open(UserModalComponent,
-        {
-          data: { date: response.createdAt, infos: response.data }
-        })
 
-    })
+      localStorage.setItem('token', response.token)
 
     this.route.navigate(['/overview'])
+    console.log(this.userForm.value)
+    
+    })
+
+    // this._backend.postUser(this.user).subscribe((response: any) => {
+
+    //   console.log('envoyer a la bd ' + response)
+    //   console.log('token' + response.token)
+
+    //   localStorage.setItem('token', response.token)
+
+    //   // this._matDialog.open(UserModalComponent,
+    //   //   {
+    //   //     data: { date: response.createdAt, infos: response.data }
+    //   //   })
+
+    // })
 
 
   }

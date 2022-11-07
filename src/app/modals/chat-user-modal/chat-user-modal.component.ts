@@ -12,26 +12,26 @@ export class ChatUserModalComponent implements OnInit {
 
   // @Inject(MAT_DIALOG_DATA) public infos:any, pour recuperer info
   // matDialogref pour envoyer donnees au parent
+
+
   constructor(@Inject(MAT_DIALOG_DATA) public infos: any, private _matDialogRef: MatDialogRef<ChatUserModalComponent>) { }
 
   ngOnInit(): void {
-    console.log(this.infos)
+    // console.log(this.infos)
+
+
   }
 
   // bouton ok
   onValidate(): void {
-
-
     //  fermer et envoyer info au parent , j'envoie data au component parent
     // l'utilisateur choisi en parametre
     this._matDialogRef.close(this.infos)
-
   }
 
   // bouton annuler
   onCancel(): void {
     this._matDialogRef.close()
-
   }
 
 }
