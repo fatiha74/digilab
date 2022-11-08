@@ -1,31 +1,31 @@
 <div class="container w-100">
 
 
-      <div bg-white shadow rounded p-4>
-        <mat-list>
-          <mat-list-item class="card mb-3 " *ngIf="myProfil">
-            <img matListAvatar [src]="myProfil.avatar" alt="..."><span *ngIf=""></span>
-            <h3 matLine> {{myProfil.firstName}} </h3>
-            <h3 matLine> {{myProfil.lastName}} </h3>
-          </mat-list-item>
-        </mat-list>
+  <div bg-white shadow rounded p-4>
+    <mat-list>
+      <mat-list-item class="card mb-3 " *ngIf="myProfil">
+        <img matListAvatar [src]="myProfil.avatar" alt="..."><span *ngIf=""></span>
+        <h3 matLine> {{myProfil.firstName}} </h3>
+        <h3 matLine> {{myProfil.lastName}} </h3>
+      </mat-list-item>
+    </mat-list>
 
-        <mat-slide-toggle [(ngModel)]="isChecked">Liste des : {{isChecked ? "utilisateurs" : "amis"}}</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="isChecked">Liste des : {{isChecked ? "utilisateurs" : "amis"}}</mat-slide-toggle>
 
-        <!-- <mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value"> -->
-        <!-- <mat-drawer #drawer [mode]="mode.value"><app-profil></app-profil></mat-drawer> -->
-        <!-- <mat-drawer-content> -->
-        <!-- <mat-form-field appearance="fill">
+    <!-- <mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value"> -->
+    <!-- <mat-drawer #drawer [mode]="mode.value"><app-profil></app-profil></mat-drawer> -->
+    <!-- <mat-drawer-content> -->
+    <!-- <mat-form-field appearance="fill">
               <mat-label>Sidenav mode</mat-label>
 
             </mat-form-field> -->
-        <!-- <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button> -->
-        <!-- </mat-drawer-content> -->
-        <!-- </mat-drawer-container> -->
+    <!-- <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button> -->
+    <!-- </mat-drawer-content> -->
+    <!-- </mat-drawer-container> -->
 
 
 
-        <!-- <mat-drawer-container class="example-container" autosize>
+    <!-- <mat-drawer-container class="example-container" autosize>
           <mat-drawer #drawer class="example-sidenav" mode="side">
             <p>Auto-resizing sidenav</p>
             <p *ngIf="profileUser">Lorem, ipsum dolor sit amet consectetur.</p>
@@ -41,61 +41,60 @@
           </div>
 
         </mat-drawer-container>-->
-<div>
-        <mat-form-field>
-          <input matInput type="text" placeholder="Recherche" class="form-control" [formControl]="searchBar">
-        </mat-form-field>
-</div>
-        <!-- liste des utilisateurs -->
-        <div *ngIf="isChecked">
-          <mat-list>
-            <!-- <mat-list-item *ngFor="let item of users; index as i" class="card mb-3" (click)="onOpenModal(i)"> -->
-            <mat-list-item *ngFor="let item of users; index as i" class="card " (click)="onOpenModal(item)">
+    <div>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Recherche" class="form-control" [formControl]="searchBar">
+      </mat-form-field>
+    </div>
+    <!-- liste des utilisateurs -->
+    <div *ngIf="isChecked">
+      <mat-list>
+        <!-- <mat-list-item *ngFor="let item of users; index as i" class="card mb-3" (click)="onOpenModal(i)"> -->
+        <mat-list-item *ngFor="let item of users; index as i" class="card " (click)="onOpenModal(item)">
+
+          <span [matBadge]="item.nbMsgEnAttente" matBadgePosition="after" matBadgeColor="accent">
 
 
-              <img matListAvatar [src]="item.avatar" alt="..." >
-              <span *ngIf="item.online"
-                 matBadge="10" matBadgePosition="below before">
+          <img matListAvatar [src]="item.avatar" alt="...">
+          </span>
+          <span *ngIf="item.online" class="online" > </span>
 
+          <h3 matLine class="card-title"> {{item.firstName}} {{item.lastName}} </h3>
+          <p matLine>
+            <span> {{item.email}} </span>
+          </p>
 
-</span>
-
-              <h3 matLine class="card-title"> {{item.firstName}} {{item.lastName}} </h3>
-              <p matLine>
-                <span> {{item.email}} </span>
-              </p>
-
-              <button type="button" mat-mini-fab color="primary" (click)="onAddFriend(item)">
-                <mat-icon>person_add</mat-icon>
-              </button>
-              <!-- <button type="button" mat-mini-fab color="warn" (click)="onAddFriend(item)" >
+          <button type="button" mat-mini-fab color="primary" (click)="onAddFriend(item)">
+            <mat-icon>person_add</mat-icon>
+          </button>
+          <!-- <button type="button" mat-mini-fab color="warn" (click)="onAddFriend(item)" >
                   <mat-icon>remove</mat-icon>
                 </button> -->
-            </mat-list-item>
-          </mat-list>
-        </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
 
-        <!-- tableau d'amis -->
-        <div *ngIf="!isChecked">
-          <mat-list>
-            <!-- <mat-list-item *ngFor="let item of users; index as i" class="card mb-3" (click)="onOpenModal(i)"> -->
-            <mat-list-item *ngFor="let item of friends; index as i" class="card" (click)="onOpenModal(item)">
-               <div *ngIf="item.online" matBadge="." matBadgePosition="after" matBadgeColor="accent" >
-               </div>
-              <img matListAvatar src="{{item.avatar}}" alt="..."><br>
+    <!-- tableau d'amis -->
+    <div *ngIf="!isChecked">
+      <mat-list>
+        <!-- <mat-list-item *ngFor="let item of users; index as i" class="card mb-3" (click)="onOpenModal(i)"> -->
+        <mat-list-item *ngFor="let item of friends; index as i" class="card" (click)="onOpenModal(item)">
+          <div *ngIf="item.online" matBadge="'" matBadgePosition="after" matBadgeColor="accent">
+          </div>
+          <img matListAvatar src="{{item.avatar}}" alt="..."><br>
 
-              <h3 matLine class="card-title"> {{item.firstName}} {{item.lastName}} </h3>
-              <p matLine>
-                <span> {{item.email}} </span>
-              </p>
-              <button type="button" mat-mini-fab color="warn" (click)="onRemoveFriend(item)">
-                <mat-icon>person_remove</mat-icon>
-              </button>
+          <h3 matLine class="card-title"> {{item.firstName}} {{item.lastName}} </h3>
+          <p matLine>
+            <span> {{item.email}} </span>
+          </p>
+          <button type="button" mat-mini-fab color="warn" (click)="onRemoveFriend(item)">
+            <mat-icon>person_remove</mat-icon>
+          </button>
 
-            </mat-list-item>
-          </mat-list>
-        </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
 
-      </div>
+  </div>
 
 </div>

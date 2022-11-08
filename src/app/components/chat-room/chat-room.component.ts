@@ -85,8 +85,10 @@ export class ChatRoomComponent implements OnInit {
       if (val.userID.username != this.infoUser.username) {
         let phrase = val.userID.content
         this._snackBar.open(`${val.userID.username}, ${val.userID.content} `, 'ok', { verticalPosition: 'top' })
-      }else{
-this.results.push(val)
+        // il faut incrémenter cette utilisateur de +1 message
+        // let nbMsg= val.
+      } else {
+        this.results.push(val)
       }
       // if(this.userChat.id===val.userID){
 

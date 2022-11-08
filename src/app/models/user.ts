@@ -40,6 +40,7 @@ export class User {
   friendsID?: User[]
   dateOfBirth?:string | Date
   online?:boolean
+  nbMsgEnAttente?:number
 
 
   constructor() {

@@ -21,6 +21,10 @@ export class ChatUserListComponent implements OnInit {
   // * toggle
   isChecked = true;
 
+  //* cumul msg
+   nbMsgEnAttente!:number
+
+
   isFriend = false;
 
   nameChecked = ""
@@ -46,10 +50,11 @@ export class ChatUserListComponent implements OnInit {
   profileUser!: any
 
   // * les personnes en ligne
-  statusOnline:any[]=[]
+  statusOnline: any[] = []
 
   // on inject le service
-  constructor(private _userService: UserService, private _matDialog: MatDialog, private _backend: BackendService, private _chatService: ChatService) { }
+  constructor(private _userService: UserService, private _matDialog: MatDialog,
+    private _backend: BackendService, private _chatService: ChatService) { }
 
   ngOnInit(): void {
 
@@ -62,12 +67,6 @@ export class ChatUserListComponent implements OnInit {
       this.friends = val
     })
 
-
-    if (this.isChecked) {
-      this.nameChecked = "amis"
-    } else {
-      this.nameChecked = "utilisateurs"
-    }
     // * filter tableau users et friends
     // this.friends = this.friends.filter(elem => elem.username !== this.users.includes(elem.username))
 
@@ -120,7 +119,7 @@ export class ChatUserListComponent implements OnInit {
 
     })
 
-
+    // * liste des amis en ligne
     this._chatService.friendsOnLine();
 
     this._chatService.getFriendsOnline().subscribe((usersOnline: any) => {
@@ -140,6 +139,20 @@ export class ChatUserListComponent implements OnInit {
 
           userTab.online = true
 
+        }
+      })
+    })
+
+    // * cumul des messages par personne
+    this._chatService.getMsgOnlineObs().subscribe((messageRecu: any)=>{
+      console.log(('messageRecu: '+ messageRecu));
+      this.users.forEach((item:any)=>{
+        if(item.username == messageRecu.userID.username) {
+          if(item.nbMsgEnAttente) {
+           item.nbMsgEnAttente = item.nbMsgEnAttente + 1
+          } else{
+          item.nbMsgEnAttente = 1
+        }
         }
       })
     })
