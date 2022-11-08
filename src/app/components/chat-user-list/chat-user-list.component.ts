@@ -24,11 +24,10 @@ export class ChatUserListComponent implements OnInit {
   // //* cumul msg
   //  nbMsgEnAttente!:number
 
+  // * curent user
+  currentUser!:any
 
   isFriend = false;
-
-  nameChecked = ""
-
 
   showFiller = false;
   // bar de recherche
@@ -57,10 +56,6 @@ export class ChatUserListComponent implements OnInit {
     private _backend: BackendService, private _chatService: ChatService) { }
 
   ngOnInit(): void {
-
-
-
-
 
     // * liste des amis
     this._chatService.getFriends().subscribe((val: any) => {
@@ -109,7 +104,7 @@ export class ChatUserListComponent implements OnInit {
         this.users = this.users.filter((user: any) => {
           if (user) {
             // tableau filtré
-            return (user.first_name).toLowerCase().includes(value.toLowerCase())
+            return (user.firstName).toLowerCase().includes(value.toLowerCase())
           }
         })
       } else {
@@ -125,20 +120,15 @@ export class ChatUserListComponent implements OnInit {
     this._chatService.getFriendsOnline().subscribe((usersOnline: any) => {
       console.log('liste des users connectés :' + usersOnline);
 
-
       this.users.forEach((userTab: any) => {
         if ((usersOnline).includes(userTab.username)) {
-
           userTab.online = true
-
         }
       })
 
       this.friends.forEach((userTab: any) => {
         if ((usersOnline).includes(userTab.username)) {
-
           userTab.online = true
-
         }
       })
     })
@@ -146,14 +136,23 @@ export class ChatUserListComponent implements OnInit {
     // * cumul des messages par personne
     this._chatService.getMsgOnlineObs().subscribe((messageRecu: any)=>{
       console.log(('messageRecu: '+ messageRecu));
+      this._userService.getUserCurrent().subscribe((response: any) => {
+        // console.warn(response)
+        this.currentUser = response
+      })
+
       this.users.forEach((item:any)=>{
+
+          // if(item.username!= this.currentUser.username){
+
         if(item.username == messageRecu.userID.username) {
           if(item.nbMsgEnAttente) {
            item.nbMsgEnAttente = item.nbMsgEnAttente + 1
           } else{
           item.nbMsgEnAttente = 1
         }
-        }
+        // }
+      }
       })
     })
 

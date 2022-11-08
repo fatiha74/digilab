@@ -1,14 +1,16 @@
-<div class="row">
-<div class="col-md-12 border w-100">
-  <app-chat-top-bar [donnees]="infoUser"></app-chat-top-bar>
+<div class="container-fluid">
 
-  <section class="border-top border-bottom" #scrollMe [scrollTop]="scrollMe.scrollHeight"
-    style="overflow-y: scroll; overflow-x:hidden; max-height: 70vh; width:60%; ">
-    <!-- <mat-chip-list> -->
-    <!-- <div class="d-flex flex-column"> -->
-    <!-- <div class="chat" *ngFor="let item of results ">
+  <div class="row">
+    <div class="col-md-12 border w-100">
+      <app-chat-top-bar [donnees]="infoUser"></app-chat-top-bar>
+
+      <section class="border-top border-bottom" #scrollMe [scrollTop]="scrollMe.scrollHeight"
+        style="overflow-y: scroll; overflow-x:hidden; max-height: 70vh; max-width:100%; ">
+        <!-- <mat-chip-list> -->
+        <!-- <div class="d-flex flex-column"> -->
+        <!-- <div class="chat" *ngFor="let item of results ">
       <div class="align-self-start"> -->
-    <!-- <div class="right" *ngIf="item">
+        <!-- <div class="right" *ngIf="item">
         <mat-chip color="accent" matline class="chipR"> {{item.content}} </mat-chip>
         class="left" *ngIf="item.punchline" >
       </div>
@@ -18,19 +20,19 @@
         </div>
       </div> -->
 
-    <!-- <div *ngIf="allMsgOnline">
+        <!-- <div *ngIf="allMsgOnline">
         <div class="left" *ngFor="let i of myMsgOnline">
           <mat-chip color="primary" matLine class="chipL"> {{i.myMsgOnline}} </mat-chip>
         </div>
       </div> -->
 
-    <!-- </div> -->
-    <!-- </mat-chip-list> -->
+        <!-- </div> -->
+        <!-- </mat-chip-list> -->
 
-    <mat-chip-list>
+        <mat-chip-list>
 
-      <div *ngFor="let item of results" class="chat">
-        <!-- <div *ngIf="item.friendID.username==userChat">
+          <div *ngFor="let item of results" class="chat">
+            <!-- <div *ngIf="item.friendID.username==userChat">
           <div class="left">
             <mat-chip class="date">{{item.date | date: "dd/MM/yyyy, à hh:mm"}}</mat-chip><br>
             <mat-chip matLine color="primary" class="myFriend">{{item.content}}</mat-chip>
@@ -43,60 +45,61 @@
           </div>
         </div> -->
 
-        <ng-container *ngIf="item.friendID.username == infoUser.username; else templateA">
-          <div class="left">
-            <mat-chip class="date">{{item.date | date: "dd/MM/yyyy, à hh:mm"}}</mat-chip><br>
-            <mat-chip matLine color="primary" class="myFriend">{{item.content}}</mat-chip>
-          </div>
-        </ng-container>
-        <ng-template #templateA>
-          <div class="right">
-            <mat-chip class="date">{{item.date | date: "dd/MM/yyyy, à hh:mm"}}</mat-chip><br>
-            <mat-chip matLine class="myClass">{{item.content}}</mat-chip>
-          </div>
-        </ng-template>
+            <ng-container *ngIf="item.friendID.username == infoUser.username; else templateA">
+              <div class="left">
+                <mat-chip class="date">{{item.date | date: "dd/MM/yyyy, à hh:mm"}}</mat-chip><br>
+                <mat-chip matLine color="primary" class="myFriend">{{item.content}}</mat-chip>
+              </div>
+            </ng-container>
+            <ng-template #templateA>
+              <div class="right">
+                <mat-chip class="date">{{item.date | date: "dd/MM/yyyy, à hh:mm"}}</mat-chip><br>
+                <mat-chip matLine class="myClass">{{item.content}}</mat-chip>
+              </div>
+            </ng-template>
 
-      </div>
-    </mat-chip-list>
-    <!-- <div *ngFor="let item of ">
+          </div>
+        </mat-chip-list>
+        <!-- <div *ngFor="let item of ">
       <div class="right">
         <mat-chip matLine color="accent" class="myFriend">{{item.content}}</mat-chip>
       </div>
     </div>
   </div> -->
 
-    <!-- <section> -->
+        <!-- <section> -->
 
 
 
 
-    <!-- </ng-container > -->
+        <!-- </ng-container > -->
 
-    <!-- </ng-container> -->
-    <!-- </ng-container> -->
-    <!-- </li>
+        <!-- </ng-container> -->
+        <!-- </ng-container> -->
+        <!-- </li>
   </ul>
 <p *ngIf="allMgsArray.sent"> hello</p>
   </ng-container> -->
-    <!-- </section> -->
+        <!-- </section> -->
 
-  </section>
-  <section *ngIf="infoUser">
-    <div class="d-flex justify-content-center align-items-center">
-      <div>
+      </section>
+      <section *ngIf="infoUser">
+        <div class="d-flex justify-content-center align-items-center">
+          <div>
 
-        <mat-form-field appearance="outline" class="w-100">
-          <input class="w-100" type="text" matInput [formControl]="newMessage" (keypress)="onSendMessage($event)">
-        </mat-form-field>
-      </div>
-      <div>
-        <button mat-raised-button color="primary" (click)="onClick()"> Envoyer</button>
-        <!-- <button *ngIf="infoUser" (click)="emojiPicker()></button> -->
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="w-100" type="text" matInput [formControl]="newMessage" (keypress)="onSendMessage($event)">
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-raised-button color="primary" (click)="onClick()"> Envoyer</button>
+            <!-- <button *ngIf="infoUser" (click)="emojiPicker()></button> -->
 
 
-      </div>
+          </div>
+        </div>
+
+      </section>
     </div>
-
-  </section>
-</div>
+  </div>
 </div>

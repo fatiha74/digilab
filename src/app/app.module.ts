@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatResolver } from './helpers/chat.resolver';
 import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 import { ChatTopBarComponent } from './components/chat-top-bar/chat-top-bar.component';
 import { ChatUserListComponent } from './components/chat-user-list/chat-user-list.component';
@@ -53,6 +54,7 @@ const config: SocketIoConfig = { url:`${environment.API_URL}`, options: {} };
 
 @NgModule({
   declarations: [
+
     AppComponent,
     UserComponent,
     LoginComponent,

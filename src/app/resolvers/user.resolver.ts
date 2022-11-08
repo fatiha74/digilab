@@ -4,28 +4,22 @@ import {
   Router,
   RouterStateSnapshot
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 
-import { ChatService } from '../services/chat.service';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
+import { UserService } from '../services/user.service';
+import { fromJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Injectable({
   providedIn: 'root'
 })
-// Post[] => type de données qui sera récupéré
-export class ChatResolver implements Resolve<User[]> {
-
-  constructor(private _chatService: ChatService) { }
-
+export class UserResolver implements Resolve<User[]> {
+  constructor(private _userService: UserService){}
   resolve(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<User[]> {
 
-
-    // return of(true);
-    return this._chatService.getMsgSentObs()
+    return this._userService.getProfile()
 
   }
-
-
 }
