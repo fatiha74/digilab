@@ -84,7 +84,7 @@ export class ChatRoomComponent implements OnInit {
       console.log(val)
       if (val.userID.username != this.infoUser.username) {
         let phrase = val.userID.content
-        this._snackBar.open(`${val.userID.username}, ${val.userID.content} `, 'ok', { verticalPosition: 'top' })
+        this._snackBar.open(`${val.userID.username}, ${val.content} `, 'ok', { verticalPosition: 'top' })
         // il faut incrémenter cette utilisateur de +1 message
         // let nbMsg= val.
       } else {
@@ -100,6 +100,12 @@ export class ChatRoomComponent implements OnInit {
     this._userService.getUserCurrent().subscribe((response: any) => {
       // console.warn(response)
       this.infoUser = response
+      
+         // * on remet à zero le nbMsgEnAttente
+      if(this.infoUser.nbMsgEnAttente){
+
+      this.infoUser.nbMsgEnAttente= null
+    }
       this.userChat = response.username
       this._chatService.getMsgFriend(this.infoUser.username).subscribe((val: any) => {
 

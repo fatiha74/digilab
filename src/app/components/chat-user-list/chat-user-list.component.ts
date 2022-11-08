@@ -21,8 +21,8 @@ export class ChatUserListComponent implements OnInit {
   // * toggle
   isChecked = true;
 
-  //* cumul msg
-   nbMsgEnAttente!:number
+  // //* cumul msg
+  //  nbMsgEnAttente!:number
 
 
   isFriend = false;
