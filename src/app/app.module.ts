@@ -38,7 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverviewComponent } from './components/overview/overview.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { ProfilComponent } from './components/profil/profil.component';
-import { RegisterComponent } from './components/register/register.component';
+// import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { SideBarLeftComponent } from './components/side-bar-left/side-bar-left.component';
 import { SideBarRightComponent } from './components/side-bar-right/side-bar-right.component';
@@ -57,7 +57,7 @@ const config: SocketIoConfig = { url: `${environment.API_URL}`, options: {} };
     AppComponent,
     UserComponent,
 
-    RegisterComponent,
+
     AgePipe,
     DirectoryComponent,
     WeatherComponent,
@@ -94,11 +94,11 @@ const config: SocketIoConfig = { url: `${environment.API_URL}`, options: {} };
     // MatFormFieldModule,
     MatDialogModule,
     BrowserModule,
-    MatIconModule,
-    MatButtonModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    MatInputModule,
+    // MatIconModule,
+    // MatButtonModule,
+    // MatAutocompleteModule,
+    // ReactiveFormsModule,
+    // MatInputModule,
     FormsModule,
     MatListModule,
     HttpClientModule,

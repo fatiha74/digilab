@@ -28,7 +28,10 @@ const routes: Routes = [
   //avant { path: 'login', component: LoginComponent },
     { path: 'login', loadChildren:()=>import('./modules/login/login.module')
   .then(m=>m.LoginModule)},
-  { path: 'register', component: RegisterComponent },
+  // { path: 'register', component: RegisterComponent },
+  { path: 'register', loadChildren:()=>import('./modules/register/register.module')
+  .then(m=>m.RegisterModule) },
+
   { path: 'finder', component: FinderComponent, canActivate: [AuthGuard] },
   {
     path: 'overview', component: OverviewComponent, canActivate: [AuthGuard],
