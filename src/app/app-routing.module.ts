@@ -8,12 +8,14 @@ import { ChatUserListComponent } from './components/chat-user-list/chat-user-lis
 import { DirectoryComponent } from './components/directory/directory.component';
 import { FinderComponent } from './components/finder/finder.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoginModule } from './modules/login/login.module';
 import { NgModule } from '@angular/core';
 import { OverviewComponent } from './components/overview/overview.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserComponent } from './components/user/user.component';
 import { UserGuard } from './user.guard';
+import { UserResolver } from './resolvers/user.resolver';
 import { WeatherComponent } from './components/weather/weather.component';
 
 const routes: Routes = [
@@ -22,18 +24,21 @@ const routes: Routes = [
     path: '', component: LoginComponent
     //  path: '**', component: RouteNotFoundComponent
   },
-  { path: 'login', component: LoginComponent },
+  //
+  //avant { path: 'login', component: LoginComponent },
+    { path: 'login', loadChildren:()=>import('./modules/login/login.module')
+  .then(m=>m.LoginModule)},
   { path: 'register', component: RegisterComponent },
-  { path: 'finder', component: FinderComponent ,canActivate:[AuthGuard]},
+  { path: 'finder', component: FinderComponent, canActivate: [AuthGuard] },
   {
-    path: 'overview', component: OverviewComponent, canActivate:[AuthGuard],
+    path: 'overview', component: OverviewComponent, canActivate: [AuthGuard],
     // les enfants de overview il faudra mettre overview/register par exemple
     children: [
       // { path: 'login', component: LoginComponent },
       // { path: 'register', component: RegisterComponent },
-      { path: 'directory', component: DirectoryComponent, canActivate:[AuthGuard] },
-      { path: 'chat', component: ChatComponent, canActivate:[AuthGuard]},
-      { path: 'profil', component: ProfilComponent, canActivate:[AuthGuard] },
+      { path: 'directory', component: DirectoryComponent, canActivate: [AuthGuard] },
+      { path: 'chat', component: ChatComponent, canActivate: [AuthGuard], resolve: { profile: UserResolver } },
+      { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
     ]
   }
 

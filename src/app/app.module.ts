@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav'
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { NgModule, ɵisObservable } from '@angular/core';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChatComponent } from './components/chat/chat.component';
-import { ChatResolver } from './helpers/chat.resolver';
 import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 import { ChatTopBarComponent } from './components/chat-top-bar/chat-top-bar.component';
 import { ChatUserListComponent } from './components/chat-user-list/chat-user-list.component';
@@ -18,29 +17,29 @@ import { DirectoryComponent } from './components/directory/directory.component';
 import { DirectoryModalComponent } from './modals/directory-modal/directory-modal.component';
 import { FinderComponent } from './components/finder/finder.component';
 import { HttpClientModule } from '@angular/common/http'
-import { LoginComponent } from './components/login/login.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+// import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input'
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatSelectModule} from '@angular/material/select';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatToolbarModule} from '@angular/material/toolbar'
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverviewComponent } from './components/overview/overview.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { ProfilComponent } from './components/profil/profil.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SharedModule } from './modules/shared/shared.module';
 import { SideBarLeftComponent } from './components/side-bar-left/side-bar-left.component';
 import { SideBarRightComponent } from './components/side-bar-right/side-bar-right.component';
 import { TokenInterceptorProvider } from './helpers/token.interceptor';
@@ -50,14 +49,14 @@ import { WeatherComponent } from './components/weather/weather.component';
 import { WeatherModalComponent } from './modals/weather-modal/weather-modal.component';
 import { environment } from 'src/environments/environment';
 
-const config: SocketIoConfig = { url:`${environment.API_URL}`, options: {} };
+const config: SocketIoConfig = { url: `${environment.API_URL}`, options: {} };
 
 @NgModule({
   declarations: [
 
     AppComponent,
     UserComponent,
-    LoginComponent,
+
     RegisterComponent,
     AgePipe,
     DirectoryComponent,
@@ -77,6 +76,7 @@ const config: SocketIoConfig = { url:`${environment.API_URL}`, options: {} };
     FinderComponent
   ],
   imports: [
+    SharedModule,
     MatBadgeModule,
     PickerModule,
     SocketIoModule,
@@ -91,7 +91,7 @@ const config: SocketIoConfig = { url:`${environment.API_URL}`, options: {} };
     MatCardModule,
     MatProgressSpinnerModule,
     MatGridListModule,
-    MatFormFieldModule,
+    // MatFormFieldModule,
     MatDialogModule,
     BrowserModule,
     MatIconModule,
@@ -105,6 +105,9 @@ const config: SocketIoConfig = { url:`${environment.API_URL}`, options: {} };
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule
+  ],
+  exports:[
+    SharedModule
   ],
 
   providers: [TokenInterceptorProvider],

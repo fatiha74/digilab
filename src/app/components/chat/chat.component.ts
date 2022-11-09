@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/user';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _activetedRoute: ActivatedRoute) { }
 
+  profile!: User
   ngOnInit(): void {
+
+    // * resolver
+    this._activetedRoute.data.subscribe((dataReceiveFromResolver: any) => {
+      this.profile = dataReceiveFromResolver.profile
+    })
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 import { BackendService } from './../../services/backend.service';
@@ -25,7 +25,7 @@ export class ChatUserListComponent implements OnInit {
   //  nbMsgEnAttente!:number
 
   // * curent user
-  currentUser!:any
+  currentUser!: any
 
   isFriend = false;
 
@@ -48,6 +48,8 @@ export class ChatUserListComponent implements OnInit {
 
   profileUser!: any
 
+  @Input() profile!: User
+
   // * les personnes en ligne
   statusOnline: any[] = []
 
@@ -56,6 +58,7 @@ export class ChatUserListComponent implements OnInit {
     private _backend: BackendService, private _chatService: ChatService) { }
 
   ngOnInit(): void {
+
 
     // * liste des amis
     this._chatService.getFriends().subscribe((val: any) => {
@@ -134,25 +137,25 @@ export class ChatUserListComponent implements OnInit {
     })
 
     // * cumul des messages par personne
-    this._chatService.getMsgOnlineObs().subscribe((messageRecu: any)=>{
-      console.log(('messageRecu: '+ messageRecu));
+    this._chatService.getMsgOnlineObs().subscribe((messageRecu: any) => {
+      console.log(('messageRecu: ' + messageRecu));
       this._userService.getUserCurrent().subscribe((response: any) => {
         // console.warn(response)
         this.currentUser = response
       })
 
-      this.users.forEach((item:any)=>{
+      this.users.forEach((item: any) => {
 
-          // if(item.username!= this.currentUser.username){
+        // if(item.username!= this.currentUser.username){
 
-        if(item.username == messageRecu.userID.username) {
-          if(item.nbMsgEnAttente) {
-           item.nbMsgEnAttente = item.nbMsgEnAttente + 1
-          } else{
-          item.nbMsgEnAttente = 1
+        if (item.username == messageRecu.userID.username) {
+          if (item.nbMsgEnAttente) {
+            item.nbMsgEnAttente = item.nbMsgEnAttente + 1
+          } else {
+            item.nbMsgEnAttente = 1
+          }
+          // }
         }
-        // }
-      }
       })
     })
 
