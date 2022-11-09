@@ -15,7 +15,7 @@ import { ChatUserListComponent } from './components/chat-user-list/chat-user-lis
 import { ChatUserModalComponent } from './modals/chat-user-modal/chat-user-modal.component';
 import { DirectoryComponent } from './components/directory/directory.component';
 import { DirectoryModalComponent } from './modals/directory-modal/directory-modal.component';
-import { FinderComponent } from './components/finder/finder.component';
+// import { FinderComponent } from './components/finder/finder.component';
 import { HttpClientModule } from '@angular/common/http'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -28,12 +28,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input'
-import { MatListModule } from '@angular/material/list';
+// import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatToolbarModule } from '@angular/material/toolbar'
+// import { MatToolbarModule } from '@angular/material/toolbar'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverviewComponent } from './components/overview/overview.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
@@ -73,7 +73,7 @@ const config: SocketIoConfig = { url: `${environment.API_URL}`, options: {} };
     ChatRoomComponent,
     ChatTopBarComponent,
     ChatUserModalComponent,
-    FinderComponent
+
   ],
   imports: [
     SharedModule,
@@ -82,10 +82,10 @@ const config: SocketIoConfig = { url: `${environment.API_URL}`, options: {} };
     SocketIoModule,
     SocketIoModule.forRoot(config),
     MatSlideToggleModule,
-    MatListModule,
+    // MatListModule,
     MatDatepickerModule,
-    MatSidenavModule,
-    MatToolbarModule,
+    // MatSidenavModule,
+    // MatToolbarModule,
     MatSnackBarModule,
     MatChipsModule,
     MatCardModule,
@@ -100,7 +100,7 @@ const config: SocketIoConfig = { url: `${environment.API_URL}`, options: {} };
     // ReactiveFormsModule,
     // MatInputModule,
     FormsModule,
-    MatListModule,
+    // MatListModule,
     HttpClientModule,
     AppRoutingModule,
     NgbModule,

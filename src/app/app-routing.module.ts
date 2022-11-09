@@ -32,7 +32,8 @@ const routes: Routes = [
   { path: 'register', loadChildren:()=>import('./modules/register/register.module')
   .then(m=>m.RegisterModule) },
 
-  { path: 'finder', component: FinderComponent, canActivate: [AuthGuard] },
+  { path: 'finder', loadChildren:()=>import('./modules/finder/finder.module')
+  .then(m=>m.FinderModule)},
   {
     path: 'overview', component: OverviewComponent, canActivate: [AuthGuard],
     // les enfants de overview il faudra mettre overview/register par exemple
