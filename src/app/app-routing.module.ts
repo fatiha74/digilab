@@ -10,13 +10,16 @@ import { FinderComponent } from './components/finder/finder.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginModule } from './modules/login/login.module';
 import { NgModule } from '@angular/core';
-import { OverviewComponent } from './components/overview/overview.component';
+import { OverviewModule } from './modules/overview/overview.module';
 import { ProfilComponent } from './components/profil/profil.component';
 import { RegisterComponent } from './components/register/register.component';
-import { UserComponent } from './components/user/user.component';
+// import { UserComponent } from './components/user/user.component';
 import { UserGuard } from './user.guard';
 import { UserResolver } from './resolvers/user.resolver';
 import { WeatherComponent } from './components/weather/weather.component';
+
+// import { OverviewComponent } from './components/overview/overview.component';
+
 
 const routes: Routes = [
 
@@ -26,24 +29,32 @@ const routes: Routes = [
   },
   //
   //avant { path: 'login', component: LoginComponent },
-    { path: 'login', loadChildren:()=>import('./modules/login/login.module')
-  .then(m=>m.LoginModule)},
-  // { path: 'register', component: RegisterComponent },
-  { path: 'register', loadChildren:()=>import('./modules/register/register.module')
-  .then(m=>m.RegisterModule) },
-
-  { path: 'finder', loadChildren:()=>import('./modules/finder/finder.module')
-  .then(m=>m.FinderModule)},
   {
-    path: 'overview', component: OverviewComponent, canActivate: [AuthGuard],
+    path: 'login', loadChildren: () => import('./modules/login/login.module')
+      .then(m => m.LoginModule)
+  },
+  // { path: 'register', component: RegisterComponent },
+  {
+    path: 'register', loadChildren: () => import('./modules/register/register.module')
+      .then(m => m.RegisterModule)
+  },
+
+  {
+    path: 'finder', loadChildren: () => import('./modules/finder/finder.module')
+      .then(m => m.FinderModule)
+  },
+  {
+    // path: 'overview', component: OverviewComponent, canActivate: [AuthGuard],
+    path: 'overview', loadChildren: () => import('./modules/overview/overview.module')
+      .then(m => m.OverviewModule), canActivate: [AuthGuard]
     // les enfants de overview il faudra mettre overview/register par exemple
-    children: [
-      // { path: 'login', component: LoginComponent },
-      // { path: 'register', component: RegisterComponent },
-      { path: 'directory', component: DirectoryComponent, canActivate: [AuthGuard] },
-      { path: 'chat', component: ChatComponent, canActivate: [AuthGuard], resolve: { profile: UserResolver } },
-      { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
-    ]
+    // children: [
+    //   // { path: 'login', component: LoginComponent },
+    //   // { path: 'register', component: RegisterComponent },
+    //   { path: 'directory', component: DirectoryComponent, canActivate: [AuthGuard] },
+    //   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard], resolve: { profile: UserResolver } },
+    //   { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
+    // ]
   }
 
 ];

@@ -11,10 +11,10 @@ import { SharedModule } from './../shared/shared.module';
   imports: [
     CommonModule,
     LoginRoutingModule,
-SharedModule
+    SharedModule
   ],
-  exports:[
-SharedModule
+  exports: [
+    SharedModule
   ]
 })
 export class LoginModule { }
