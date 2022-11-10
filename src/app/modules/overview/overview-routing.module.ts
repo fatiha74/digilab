@@ -15,7 +15,8 @@ const routes: Routes = [{
     // { path: 'register', component: RegisterComponent },
     { path: 'directory', component: DirectoryComponent, canActivate: [AuthGuard] },
     { path: 'chat', component: ChatComponent, canActivate: [AuthGuard], resolve: { profile: UserResolver } },
-    { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
+    // { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
+    { path: 'profil/username', component: ProfilComponent, canActivate: [AuthGuard] },
   ]
 }
 ];
