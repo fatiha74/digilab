@@ -41,23 +41,26 @@
           </div>
 
         </mat-drawer-container>-->
-    <div>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Recherche" class="form-control" [formControl]="searchBar">
-      </mat-form-field>
-    </div>
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="Recherche" class="form-control" [formControl]="searchBar">
+    </mat-form-field>
+
+
+
     <!-- liste des utilisateurs -->
     <div *ngIf="isChecked">
       <mat-list>
         <!-- <mat-list-item *ngFor="let item of users; index as i" class="card mb-3" (click)="onOpenModal(i)"> -->
         <mat-list-item *ngFor="let item of users; index as i" class="card " (click)="onOpenModal(item)">
 
-          <span [matBadge]="item.nbMsgEnAttente" matBadgePosition="after" matBadgeColor="accent">
-
-
-          <img matListAvatar [src]="item.avatar" alt="...">
+          <span *ngIf="item.nbMsgEnAttente">
+            <mat-icon [matBadge]="item.nbMsgEnAttente" matBadgePosition="after" matBadgeColor="accent" color="primary">
+              chat_bubble</mat-icon>
           </span>
-          <span *ngIf="item.online" class="online" > </span>
+          <span *ngIf="item.online" class="online"> </span>
+          <img matListAvatar [src]="item.avatar" alt="...">
+
 
           <h3 matLine class="card-title"> {{item.firstName}} {{item.lastName}} </h3>
           <p matLine>
@@ -78,7 +81,7 @@
     <div *ngIf="!isChecked">
       <mat-list>
         <!-- <mat-list-item *ngFor="let item of users; index as i" class="card mb-3" (click)="onOpenModal(i)"> -->
-        <mat-list-item *ngFor="let item of friends; index as i" class="card" (click)="onOpenModal(item)">
+        <mat-list-item *ngFor="let item of friends; index as i" class="card">
           <div *ngIf="item.online" matBadge="'" matBadgePosition="after" matBadgeColor="accent">
           </div>
           <img matListAvatar src="{{item.avatar}}" alt="..."><br>

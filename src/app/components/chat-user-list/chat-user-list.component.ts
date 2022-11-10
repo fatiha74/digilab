@@ -33,18 +33,22 @@ export class ChatUserListComponent implements OnInit {
   // bar de recherche
   searchBar: FormControl = new FormControl();
 
+
+  usersOrigine: User[] = []
   //* tableau qui va recupere la liste des utilisateurs
   users: User[] = []
+  //*duplicata du tableau recu de l'api
+  usersArray!: User[]
 
+  friendsOrigine: User[] = []
   // * tableau contenant la liste d'amis
   friends: User[] = []
+  //*duplicata du tableau recu de l'api
+  friendsArray!: any[]
 
   myProfil!: any
   //tableau
   // userInfos!: User[]
-
-  //duplicata du tableau recu de l'api
-  userArray!: User[]
 
   profileUser!: any
 
@@ -62,6 +66,9 @@ export class ChatUserListComponent implements OnInit {
 
     // * liste des amis
     this._chatService.getFriends().subscribe((val: any) => {
+      // tableau de base
+      this.friendsOrigine = val
+      //tableau qu'on va filtrer
       this.friends = val
     })
 
@@ -92,29 +99,77 @@ export class ChatUserListComponent implements OnInit {
 
     // * getuserlist du backend
     this._userService.getUsersList().subscribe((val: any) => {
+
+      this.usersOrigine.map((user: User) => {
+        user.avatar = user.avatar || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+        return user
+      })
+      this.friendsOrigine.map((user: User) => {
+        user.avatar = user.avatar || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+        return user
+      })
       console.warn(val)
+      // tableau de base
+      this.usersOrigine = val.body
+      // tableau qu'on va filtrer
       this.users = val.body
+
       console.warn(this.users)
     })
 
 
-
+    /*********************************************
+     *
+     *   if (value) {
+              this.users = this.users.filter((user: any) => {
+                if (user) {
+                  // tableau filtré
+                  return (user.firstName).toLowerCase().includes(value.toLowerCase())
+                }
+              })
+            } else {
+              // je recupere le tableau d'origine
+              this.users = this.usersArray
+            }
+     * ********************************************/
 
     //*la barre de recherche pour la liste de user
     this.searchBar.valueChanges.subscribe((value: any) => {
       // si j'ecris une valeur dans la barre de recherche
+      // !si ischecket
       if (value) {
-        this.users = this.users.filter((user: any) => {
-          if (user) {
-            // tableau filtré
-            return (user.firstName).toLowerCase().includes(value.toLowerCase())
-          }
-        })
+        if (this.isChecked) {
+          this.users = this.usersOrigine
+          this.users = this.users.filter((user: any) => {
+            if (user) {
+              // tableau filtré
+              console.log("utilisateur", value)
+              return (user.firstName).toLowerCase().includes(value.toLowerCase()) ||
+                (user.lastName).toLowerCase().includes(value.toLowerCase())
+            }
+
+          })
+
+
+
+
+        } else {
+          this.friends = this.friendsOrigine
+          this.friends = this.friends.filter((user: any) => {
+            if (user) {
+              // tableau filtré
+              console.log("friend", value)
+
+              return (user.firstName).toLowerCase().includes(value.toLowerCase()) ||
+                (user.lastName).toLowerCase().includes(value.toLowerCase())
+            }
+          })
+        }
       } else {
         // je recupere le tableau d'origine
-        this.users = this.userArray
+        this.friends = this.friendsOrigine
+        this.users = this.usersOrigine
       }
-
     })
 
     // * liste des amis en ligne
@@ -191,6 +246,8 @@ export class ChatUserListComponent implements OnInit {
     // if(index > -1){
     //   this.friends.splice(index,1)
     // }
+    console.log('je suis la');
+
     this.friends = this.friends.filter(elem => elem.username !== user.username)
   }
 
